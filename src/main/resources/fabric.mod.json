@@ -1,38 +1,33 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "dataloader",
   "version": "${version}",
-
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Data loader",
+  "description": "Global data packs that apply to all worlds.",
   "authors": [
-    "Me!"
+    "Commander07"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://modrinth.com/mod/dataloader",
+    "sources": "https://github.com/Commander07/data-loader",
+    "issues": "https://github.com/Commander07/data-loader/issues"
   },
-
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
-
+  "icon": "assets/dataloader/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "dataloader.DataLoader"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "dataloader.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.11.3",
     "fabric": "*",
     "minecraft": "1.18.x",
     "java": ">=17"
   },
-  "suggests": {
-    "another-mod": "*"
-  }
+  "accessWidener" : "dataloader.accesswidener"
 }
