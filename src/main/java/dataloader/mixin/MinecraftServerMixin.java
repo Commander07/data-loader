@@ -2,6 +2,7 @@ package dataloader.mixin;
 
 import dataloader.DataLoader;
 import net.minecraft.resource.*;
+import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,14 +13,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MinecraftServerMixin {
 	@Inject(method = "loadDataPacks", at = @At("HEAD"))
 	private static void loadDataPacks(
-			ResourcePackManager resourcePackManager,
-			DataPackSettings dataPackSettings,
-			boolean safeMod,
-			CallbackInfoReturnable<DataPackSettings> info
+			ResourcePackManager resourcePackManager, DataPackSettings dataPackSettings, boolean safeMode, FeatureSet enabledFeatures, CallbackInfoReturnable<DataConfiguration> cir
 	) {
 		resourcePackManager.providers.add(
 				new FileResourcePackProvider(
-						DataLoader.DATAPACKS_PATH.toFile(),
+						DataLoader.DATAPACKS_PATH,
+						ResourceType.SERVER_DATA,
 						DataLoader.RESOURCE_PACK_SOURCE
 				)
 		);
