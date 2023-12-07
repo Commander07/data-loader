@@ -1,6 +1,7 @@
 package dataloader.mixin;
 
 import dataloader.DataLoader;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.*;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.server.MinecraftServer;
@@ -19,7 +20,8 @@ public class MinecraftServerMixin {
 				new FileResourcePackProvider(
 						DataLoader.DATAPACKS_PATH,
 						ResourceType.SERVER_DATA,
-						DataLoader.RESOURCE_PACK_SOURCE
+						DataLoader.RESOURCE_PACK_SOURCE,
+						MinecraftClient.getInstance().getSymlinkFinder()
 				)
 		);
 	}
