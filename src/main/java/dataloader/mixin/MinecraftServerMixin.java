@@ -1,5 +1,6 @@
 package dataloader.mixin;
 
+import com.google.common.collect.ImmutableSet;
 import dataloader.DataLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.*;
@@ -9,6 +10,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.ArrayList;
 
 @Mixin(value = MinecraftServer.class, priority = 1001)
 public class MinecraftServerMixin {
@@ -26,4 +29,18 @@ public class MinecraftServerMixin {
 		);
 	}
 
+	@Inject(method = "createDataPackSettings", at = @At("HEAD"))
+	private static void createDataPackSettings(ResourcePackManager dataPackManager, CallbackInfoReturnable<DataPackSettings> cir) {
+		ArrayList<String> enabledPacks = new ArrayList<>();
+		if (!DataLoader.CONFIG.onlyLoadSpecified)
+			enabledPacks.addAll(
+					dataPackManager.getEnabledNames().stream().filter(x -> !DataLoader.CONFIG.loadOrder.contains(x)).collect(ImmutableSet.toImmutableSet())
+			);
+		else if (!DataLoader.CONFIG.loadOrder.contains("fabric"))
+			enabledPacks.add("fabric");
+		enabledPacks.addAll(DataLoader.CONFIG.loadOrder);
+
+		DataLoader.LOGGER.info("Applying datapacks: {}", enabledPacks);
+		dataPackManager.setEnabledProfiles(enabledPacks);
+	}
 }

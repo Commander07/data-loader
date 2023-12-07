@@ -12,7 +12,7 @@
     "sources": "https://github.com/Commander07/data-loader",
     "issues": "https://github.com/Commander07/data-loader/issues"
   },
-  "license": "CC0-1.0",
+  "license": "Apache-2.0",
   "icon": "assets/dataloader/icon.png",
   "environment": "*",
   "entrypoints": {
