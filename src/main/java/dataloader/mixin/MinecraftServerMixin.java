@@ -20,7 +20,8 @@ public class MinecraftServerMixin {
 	private static void loadDataPacks(
 			ResourcePackManager resourcePackManager, DataPackSettings dataPackSettings, boolean safeMode, FeatureSet enabledFeatures, CallbackInfoReturnable<DataConfiguration> cir
 	) {
-		resourcePackManager.providers.add(
+		ArrayList<ResourcePackProvider> providers = new ArrayList<>(resourcePackManager.providers);
+		providers.add(
 				new FileResourcePackProvider(
 						DataLoader.DATAPACKS_PATH,
 						ResourceType.SERVER_DATA,
@@ -28,6 +29,7 @@ public class MinecraftServerMixin {
 						LevelStorage.createSymlinkFinder(FabricLoader.getInstance().getGameDir().resolve(LevelStorage.ALLOWED_SYMLINKS_FILE_NAME))
 				)
 		);
+		resourcePackManager.providers = ImmutableSet.copyOf(providers);
 	}
 
 	@Inject(method = "createDataPackSettings", at = @At("HEAD"))
