@@ -29,13 +29,11 @@ public class DataLoader implements ModInitializer {
 	public void onInitialize() {
 		try {
 			CONFIG = Config.load();
-			Path path = DATAPACKS_PATH;
-			if (!Files.exists(path)) {
-				Files.createDirectory(path);
+			if (!Files.exists(DATAPACKS_PATH)) {
+				Files.createDirectory(DATAPACKS_PATH);
 			}
 		} catch (IOException e) {
 			LOGGER.error("Failed to initialize data loader: ", e);
 		}
-
 	}
 }
