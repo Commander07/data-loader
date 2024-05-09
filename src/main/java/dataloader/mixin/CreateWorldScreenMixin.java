@@ -16,11 +16,11 @@ public class CreateWorldScreenMixin {
     private ResourcePackManager getScannedPacks(
             Path dataPacksPath, SymlinkFinder symlinkFinder
     ) {
-        return new ResourcePackManager(new ResourcePackProvider[]{new VanillaDataPackProvider(symlinkFinder), new FileResourcePackProvider(dataPacksPath, ResourceType.SERVER_DATA, ResourcePackSource.WORLD, symlinkFinder), new FileResourcePackProvider(
+        return new ResourcePackManager(new VanillaDataPackProvider(symlinkFinder), new FileResourcePackProvider(dataPacksPath, ResourceType.SERVER_DATA, ResourcePackSource.WORLD, symlinkFinder), new FileResourcePackProvider(
                 DataLoader.DATAPACKS_PATH,
                 ResourceType.SERVER_DATA,
                 DataLoader.RESOURCE_PACK_SOURCE,
                 symlinkFinder
-        )});
+        ));
     }
 }
