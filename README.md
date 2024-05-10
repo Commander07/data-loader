@@ -8,7 +8,7 @@ Unlike sargunv's original mod, this port has a completely optional load order co
 <br><br><br>
 `onlyLoadSpecified`: When set to true Minecraft will only load the datapacks in the `loadOrder` list and the fabric datapack. Unless the vanilla datapack or a suitable replacement is provided the game will crash upon launch.
 
-`loadOrder`: Minecraft will load the datapacks in the order specified in this list. Datapacks in the ´datapacks´ folder needs to be prefixed with ´file/´, the `vanilla`, `fabric` and experimental datapacks don't need to be prefixed with anything.
+`loadOrder`: Minecraft will load the datapacks in the order specified in this list. Datapacks in the ´datapacks´ folder needs to be prefixed with ´file/´, the `vanilla`, `fabric` and experimental datapacks don't need to be prefixed with anything. Internal mod datapacks should however be prefixed by the mod id and the `/` should be replaced by a `:`.
 
 ## Setup
 
