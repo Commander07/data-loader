@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import dataloader.DataLoader;
 import net.fabricmc.fabric.impl.resource.loader.ModResourcePackCreator;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.class_10958;
 import net.minecraft.resource.*;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.server.MinecraftServer;
@@ -16,9 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Mixin(value = MinecraftServer.class, priority = 1001)
+@Mixin(value = class_10958.class, priority = 1001)
 public class MinecraftServerMixin {
-	@Inject(method = "loadDataPacks(Lnet/minecraft/resource/ResourcePackManager;Ljava/util/Collection;Lnet/minecraft/resource/featuretoggle/FeatureSet;Z)Lnet/minecraft/resource/DataConfiguration;", at = @At("HEAD"))
+	@Inject(method = "method_68919(Lnet/minecraft/resource/ResourcePackManager;Ljava/util/Collection;Lnet/minecraft/resource/featuretoggle/FeatureSet;Z)Lnet/minecraft/resource/DataConfiguration;", at = @At("HEAD"))
 	private static void loadDataPacks(
 			ResourcePackManager resourcePackManager, Collection<String> enabledProfiles, FeatureSet enabledFeatures, boolean allowEnabling, CallbackInfoReturnable<DataConfiguration> cir
 	) {
@@ -35,7 +36,7 @@ public class MinecraftServerMixin {
 		resourcePackManager.scanPacks();
 	}
 
-	@Inject(method = "createDataPackSettings", at = @At("HEAD"))
+	@Inject(method = "method_68920", at = @At("HEAD"))
 	private static void createDataPackSettings(ResourcePackManager dataPackManager, boolean allowEnabling, CallbackInfoReturnable<DataPackSettings> cir) {
 		ArrayList<String> enabledPacks = new ArrayList<>();
 		if (!DataLoader.CONFIG.onlyLoadSpecified) {
